@@ -33,7 +33,6 @@ router.post("/specific", async (req,res)=>{
 router.get("/sort/:basis", async (req,res)=>{   
     const {basis}=req.params;
     const products = await Product.find().sort(basis);
-    // const products=await Product.find({name:input});
     res.render("products/homeTemp",{products});
 })
 router.post("/new", async (req,res)=>{  

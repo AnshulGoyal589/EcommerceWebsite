@@ -6,11 +6,11 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const PORT=process.env.PORT ;
+const PORT=process.env.PORT || 3060 ; 
 const session = require('express-session');  
 const cookieParser = require('cookie-parser');  
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy; 
 const User=require("./models/User"); 
 const FacebookStrategy=require("passport-facebook").Strategy;
 const {isLoggedIn}=require("./middleware");
@@ -18,13 +18,7 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_ID);
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-// mongoose.connect("mongodb://127.0.0.1:27017/ecommerceWebsite")
-mongoose.connect(process.env.MONGODB_URL
-, {
-  poolSize: 10, // Adjust as needed
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URL)
 .then(()=> console.log("db connected sucessfully".yellow))
 .catch((err)=> console.log(err));
 
@@ -86,9 +80,7 @@ passport.use(new GoogleStrategy({
   })
   .catch(err => {
     return cb(err, null);
-  });
-
-    
+  });    
   }
 ));
 
