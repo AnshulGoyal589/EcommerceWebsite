@@ -7,10 +7,8 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const twilio = require('twilio');
 var GoogleStrategy = require('passport-google-oidc');
-
-const accountSid = 'AC050107307a6c1b98f768259a9233f3e1';
-const authToken = '4f42d34278df05b13ccdd3588cd90ed8';
-const client = new twilio(accountSid, authToken);
+require('dotenv').config();
+const client = new twilio(process.env.ACCOUNT_SID , process.env.AUTH_TOKEN);
 
 
 

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const PORT=process.env.PORT || 3030;
+const PORT=process.env.PORT ;
 const session = require('express-session');  
 const cookieParser = require('cookie-parser');  
 const passport = require('passport');
@@ -14,16 +14,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const User=require("./models/User"); 
 const FacebookStrategy=require("passport-facebook").Strategy;
 const {isLoggedIn}=require("./middleware");
-const stripe = require('stripe')('sk_test_51NpBEdSFv9GHTIIZJaC6Y5CH8l1deCosoHCr97ypUbB64tPAhHdNM5vMEmeM1MHiQyQcdG09WQQ2CZrL39nekJ63008k53ovGr');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_ID);
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-
-const accountSid = 'AC050107307a6c1b98f768259a9233f3e1';
-const authToken = '4f42d34278df05b13ccdd3588cd90ed8';
-
-
 // mongoose.connect("mongodb://127.0.0.1:27017/ecommerceWebsite")
-mongoose.connect('mongodb+srv://anshulgoyal589:12341234@cluster0.mdfzkhn.mongodb.net/ecommerceWebsite?appName=mongosh+1.10.4'
+mongoose.connect(process.env.MONGODB_URL
 , {
   poolSize: 10, // Adjust as needed
   useNewUrlParser: true,
@@ -76,8 +72,8 @@ app.use( cartRoutes);
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.use(new GoogleStrategy({
-  clientID:'456174320355-puub5iuanlrgmcjp5c3fgsu1t7b48pp3.apps.googleusercontent.com',
-  clientSecret: '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',
+  clientID:process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: '/oauth2/redirect/google',
   scope: ['profile']
   },
@@ -131,8 +127,8 @@ app.post('/:IDD/create-checkout-session',isLoggedIn, async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: `http://localhost:3000/products/${IDD}/cart`,
+    success_url: `${process.env.BASE_URL}/success`,
+    cancel_url: `${process.env.BASE_URL}/products/${IDD}/cart`,
   });
 
   res.redirect(303, session.url); 
@@ -160,7 +156,7 @@ passport.deserializeUser(function(user, cb) {
 
 
 app.listen(PORT, () => 
-    console.log("Server listening at port".blue ,`http://localhost:${PORT}`.red)
+    console.log("Server listening at port".blue ,`${process.env.BASE_URL}`.red)
 )
 
 

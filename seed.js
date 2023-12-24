@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const Product=require("./models/Product");
-
-mongoose.connect('mongodb+srv://anshulgoyal589:12341234@cluster0.mdfzkhn.mongodb.net/ecommerceWebsite?appName=mongosh+1.10.4')
+require('dotenv').config();
+mongoose.connect(process.env.MONGODB_URL)
 .then(()=> console.log("db connected sucessfully".yellow))
 .catch((err)=> console.log(err));
 
