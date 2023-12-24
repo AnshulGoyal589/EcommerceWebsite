@@ -22,7 +22,8 @@ const accountSid = 'AC050107307a6c1b98f768259a9233f3e1';
 const authToken = '4f42d34278df05b13ccdd3588cd90ed8';
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/ecommerceWebsite")
+// mongoose.connect("mongodb://127.0.0.1:27017/ecommerceWebsite")
+mongoose.connect('mongodb+srv://anshulgoyal589:12341234@cluster0.mdfzkhn.mongodb.net/ecommerceWebsite?appName=mongosh+1.10.4')
 .then(()=> console.log("db connected sucessfully".yellow))
 .catch((err)=> console.log(err));
 
