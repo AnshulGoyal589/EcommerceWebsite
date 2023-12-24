@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const PORT=3000;
+const PORT=3030;
 const session = require('express-session');  
 const cookieParser = require('cookie-parser');  
 const passport = require('passport');
@@ -89,35 +89,6 @@ passport.use(new GoogleStrategy({
     
   }
 ));
-
-// passport.use(new GoogleStrategy({
-//   clientID:'456174320355-puub5iuanlrgmcjp5c3fgsu1t7b48pp3.apps.googleusercontent.com',
-//   clientSecret: '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',
-//   callbackURL: '/oauth2/redirect/google',
-//   scope: ['profile']
-// }, async function (issuer, profile, cb) {
-  // try {
-    // const collection = db.collection('users');
-    // console.log(profile);
-    // const existingUser = await User.findOne({ googleId: profile.id });
-
-    // if (!existingUser) {
-    //   const user = {
-    //     googleId: profile.id,
-    //     userame: profile.userame
-    //   };
-    //   const result = await User.create(user);
-    //   await User.save();
-    //   const id = result.insertedId;
-    //   user.id = id;
-    //   return cb(null, user);
-    // }
-
-    // return cb(null, existingUser);
-  // } catch (error) {
-  //   return cb(error);
-  // }
-// }));
 
  
 app.get("/",(req,res)=>{
