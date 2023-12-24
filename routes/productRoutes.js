@@ -21,7 +21,7 @@ function checkForNullCharacters(obj) {
 
 router.get("/", async (req,res)=>{   
     
-    const products=await Product.find({});
+    const products=await Product.find({}).maxTimeMS(20000).exec();
     res.render("products/homeTemp",{products});
 })
 router.post("/specific", async (req,res)=>{   
