@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express.Router();
 const Review = require("../models/Review");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
