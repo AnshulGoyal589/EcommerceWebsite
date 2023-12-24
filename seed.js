@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const Product=require("./models/Product");
 
-mongoose.connect("mongodb://127.0.0.1:27017/ecommerceWebsite")
+mongoose.connect('mongodb+srv://anshulgoyal589:12341234@cluster0.mdfzkhn.mongodb.net/ecommerceWebsite?appName=mongosh+1.10.4')
 .then(()=> console.log("db connected sucessfully".yellow))
 .catch((err)=> console.log(err));
 
